@@ -363,9 +363,10 @@ body {
 
 .hero__card {
   pointer-events: auto;
-  position: relative; /* queda sobre el ::before */
+  position: relative;
   max-width: clamp(300px, 52vw, 620px);
   width: 100%;
+  will-change: opacity, transform;
 }
 
 .hero__badge {
@@ -458,6 +459,22 @@ body {
 .scene-section__card:not(.quote-card) {
   opacity: 0;
   will-change: opacity, transform;
+  pointer-events: none; /* el glass nunca bloquea el scroll táctil */
+}
+
+/* Solo los elementos interactivos capturan eventos */
+.scene-section__card .btn,
+.scene-section__card a,
+.scene-section__card button {
+  pointer-events: auto;
+}
+
+/* Hover effects solo en dispositivos que lo soportan */
+@media (hover: hover) {
+  .scene-section__card .contact-card,
+  .scene-section__card .info-card {
+    pointer-events: auto;
+  }
 }
 
 .scene-section__card {
@@ -862,6 +879,7 @@ body {
 /* ─── Responsive ─────────────────────────────────────── */
 
 @media (max-width: 768px) {
+  /* Header */
   .site-header__menu-toggle { display: flex; }
 
   .site-header__nav {
@@ -878,14 +896,10 @@ body {
   }
 
   .site-header__nav--open { display: block; }
+  .site-header__nav-list  { flex-direction: column; gap: 2px; }
+  .site-header__nav-link  { padding: var(--sp-3) var(--sp-4); font-size: var(--fz-base); }
 
-  .site-header__nav-list { flex-direction: column; gap: 2px; }
-
-  .site-header__nav-link {
-    padding: var(--sp-3) var(--sp-4);
-    font-size: var(--fz-base);
-  }
-
+  /* Hero */
   .hero {
     padding-inline: var(--sp-5);
     padding-top: calc(64px + var(--sp-5));
@@ -900,18 +914,24 @@ body {
     );
   }
 
-  .hero__card     { max-width: 100%; }
-  .hero__title    { font-size: clamp(36px, 10vw, 56px); }
+  .hero__card  { max-width: 100%; }
+  .hero__title { font-size: clamp(36px, 10vw, 56px); }
 
-  .scene-section {
-    padding-inline: var(--sp-4);
-    padding-top: calc(64px + var(--sp-5));
-    align-items: flex-start;
+  /*
+   * Cards al fondo — el mural queda visible arriba para deslizar con el pulgar.
+   * Todos los modificadores de posición colapsan a este estado en móvil.
+   */
+  .scene-section,
+  .scene-section--right,
+  .scene-section--valign-bottom {
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0 var(--sp-3) var(--sp-5);
   }
 
   .scene-section__card {
     max-width: 100%;
-    max-height: calc(100vh - 140px);
+    max-height: 52vh;
     border-radius: var(--r-lg);
     padding: var(--sp-5);
   }

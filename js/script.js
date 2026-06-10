@@ -18,6 +18,7 @@ const driver      = document.getElementById('scroll-driver');
 const loader      = document.getElementById('loader');
 const barFill     = document.getElementById('loader-bar-fill');
 const loaderText  = document.getElementById('loader-text');
+const heroCard    = document.querySelector('.hero__card');
 
 const images = new Array(FRAMES.length);
 let loadedCount  = 0;
@@ -54,7 +55,16 @@ function drawFrame(index) {
   ctx.drawImage(img, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
 }
 
+function updateHeroParallax() {
+  if (!heroCard) return;
+  const zone0 = document.querySelector('.scene__zone');
+  const p = Math.min(window.scrollY / zone0.offsetHeight, 1);
+  heroCard.style.opacity   = String(Math.max(0, 1 - p * 1.5).toFixed(3));
+  heroCard.style.transform = `translateY(${(p * -60).toFixed(1)}px)`;
+}
+
 function handleScroll() {
+  updateHeroParallax();
   updateCardAnims();
 
   const frameIndex = Math.min(
@@ -294,32 +304,41 @@ function initCardAnims() {
       rotate: parseFloat(section.dataset.rotate ?? '0'),
     });
   });
-  updateCardAnims(); // establece estado inicial antes de cualquier scroll
+  updateHeroParallax();
+  updateCardAnims();
 }
 
 function updateCardAnims() {
-  const sy = window.scrollY;
+  const sy       = window.scrollY;
+  const isMobile = window.innerWidth < 768;
 
-  CARD_ZONES.forEach(({ zone, card, entry, rotate }) => {
+  CARD_ZONES.forEach(({ zone, card, entry: rawEntry, rotate }) => {
     const top = zone.offsetTop;
     const h   = zone.offsetHeight;
     const p   = Math.max(0, Math.min(1, (sy - top) / h));
 
-    const enter = easeOutCubic(Math.min(p / 0.28, 1));   // entra rápido
-    const exit  = easeInCubic(Math.max(0, (p - 0.72) / 0.28)); // sale suave
+    const enter = easeOutCubic(Math.min(p / 0.28, 1));
+    const exit  = easeInCubic(Math.max(0, (p - 0.72) / 0.28));
     const t     = enter * (1 - exit);
 
-    const dist = 80;
+    // En mobile todas las cards entran desde abajo
+    const entry = isMobile ? 'bottom' : rawEntry;
+    const dist  = isMobile ? 56 : 80;
+
     let tx = 0, ty = 0;
     if (entry === 'left')   tx = (enter - 1) * dist;
     if (entry === 'right')  tx = (1 - enter) * dist;
     if (entry === 'bottom') ty = (1 - enter) * dist;
     if (entry === 'top')    ty = (enter - 1) * dist;
 
-    // pointer-events solo cuando es visible
-    card.style.pointerEvents = t > 0.05 ? 'auto' : 'none';
-    card.style.opacity        = t.toFixed(3);
-    card.style.transform      = `translate(${tx.toFixed(1)}px,${ty.toFixed(1)}px) rotate(${(rotate * enter).toFixed(2)}deg)`;
+    // Parallax: deriva suavemente mientras la zona avanza
+    const drift = (p - 0.5) * -22 * enter * (1 - exit);
+
+    // Scale: 0.94 → 1.0 al entrar, 1.0 → 0.94 al salir
+    const scale = 0.94 + 0.06 * t;
+
+    card.style.opacity   = t.toFixed(3);
+    card.style.transform = `translate(${tx.toFixed(1)}px,${(ty + drift).toFixed(1)}px) rotate(${(rotate * enter).toFixed(2)}deg) scale(${scale.toFixed(3)})`;
   });
 }
 
