@@ -86,17 +86,19 @@
       </div>
     </section>
 
-    <!-- SECCIÓN SCROLL DRIVEN: esta sección bloquea el scroll vertical para avanzar la secuencia de frames -->
-    <section class="scroll-driven section--light" aria-labelledby="scroll-driven-titulo" data-scroll-driven>
-      <h2 id="scroll-driven-titulo" class="sr-only">Secuencia visual controlada por scroll</h2>
-      <div class="scroll-driven__sticky">
-        <div class="scroll-driven__frame">
-          <canvas
-            role="img"
-            aria-label="Secuencia visual de la institución controlada por el scroll"
-            class="scroll-driven__image"
-            data-scroll-frame
-          ></canvas>
+
+    <section class="video-section section--light">
+      <div class="container">
+        <div class="video-section__frame">
+          <video
+            class="video-section__video"
+            src="assets/images/video/video.mp4"
+            autoplay
+            loop
+            muted
+            playsinline
+            aria-label="Video institucional de la Escuela San Gerardo"
+          ></video>
         </div>
       </div>
     </section>
