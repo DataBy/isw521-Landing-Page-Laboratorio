@@ -21,7 +21,11 @@ function updateHeader() {
 }
 
 function updateActiveLink(id) {
-  navLinks.forEach(link => link.classList.toggle('is-active', link.getAttribute('href') === `#${id}`));
+  navLinks.forEach(link => {
+    const isActive = link.getAttribute('href') === `#${id}`;
+    link.classList.toggle('is-active', isActive);
+    link.setAttribute('aria-current', isActive ? 'true' : 'false');
+  });
 }
 
 if (!reduceMotion) {
