@@ -1,35 +1,23 @@
 <!DOCTYPE html>
 <html lang="es-CR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#000000" />
-
-  <!-- SEO primario -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Escuela San Gerardo | Ciudad Quesada, San Carlos</title>
-  <meta name="description" content="Sitio informativo institucional de la Escuela San Gerardo, ubicada en Ciudad Quesada, San Carlos. Información de contacto, ubicación, horario y vinculación con la comunidad." />
-  <meta name="keywords" content="Escuela San Gerardo, Ciudad Quesada, San Carlos, escuela pública, Circuito 14, MEP, educación Costa Rica" />
-  <meta name="author" content="Escuela San Gerardo" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://URL-DEL-SITIO.com/" />
+  <meta name="description" content="Sitio informativo institucional de la Escuela San Gerardo, ubicada en Ciudad Quesada, San Carlos. Información de contacto, ubicación, horario y vinculación con la comunidad.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Escuela San Gerardo">
+  <link rel="canonical" href="https://URL-DEL-SITIO.com/">
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Escuela San Gerardo | Ciudad Quesada" />
-  <meta property="og:description" content="Centro educativo público ubicado en Ciudad Quesada, San Carlos. Información institucional, contacto, horario y ubicación." />
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="es_CR" />
-  <meta property="og:image" content="assets/images/logo/logo.png" />
+  <meta property="og:title" content="Escuela San Gerardo | Ciudad Quesada">
+  <meta property="og:description" content="Centro educativo público ubicado en Ciudad Quesada, San Carlos.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CR">
+  <meta property="og:image" content="assets/images/logo/logo.png">
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Escuela San Gerardo | Ciudad Quesada" />
-  <meta name="twitter:description" content="Sitio informativo institucional de la Escuela San Gerardo." />
-  <meta name="twitter:image" content="assets/images/logo/logo.png" />
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js" defer></script>
 
-  <!-- Estilos -->
-  <link rel="stylesheet" href="css/style.css" />
-
-  <!-- Datos estructurados -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -48,311 +36,152 @@
   </script>
 </head>
 <body>
+  <header class="site-header" data-header>
+    <a class="brand" href="#inicio" aria-label="Ir al inicio">
+      <img src="assets/images/logo/logo.png" alt="Logo de la Escuela San Gerardo" class="brand__logo">
+      <span class="brand__name">Escuela San Gerardo</span>
+    </a>
 
-  <!-- Loading overlay (sin cambios) -->
-  <div id="loader" class="loader" role="status" aria-label="Cargando animación">
-    <div class="loader__bar">
-      <div id="loader-bar-fill" class="loader__bar-fill"></div>
-    </div>
-    <span id="loader-text" class="loader__text" aria-live="polite">0%</span>
-  </div>
+    <button class="nav-toggle" type="button" aria-label="Abrir menú de navegación" aria-expanded="false" data-nav-toggle>
+      <span></span><span></span><span></span>
+    </button>
 
-  <!-- Header fijo -->
-  <header class="site-header" role="banner">
-    <div class="site-header__inner">
-
-      <a class="site-header__brand" href="#inicio" aria-label="Inicio — Escuela San Gerardo">
-        <img
-          src="assets/images/logo/logo.png"
-          alt="Logo de la Escuela San Gerardo"
-          class="site-header__logo"
-          width="36"
-          height="36"
-        />
-        <span class="site-header__name">Escuela San Gerardo</span>
-      </a>
-
-      <button
-        class="site-header__menu-toggle"
-        type="button"
-        aria-expanded="false"
-        aria-controls="main-nav"
-        aria-label="Abrir menú de navegación"
-      >
-        <span class="site-header__bar" aria-hidden="true"></span>
-        <span class="site-header__bar" aria-hidden="true"></span>
-        <span class="site-header__bar" aria-hidden="true"></span>
-      </button>
-
-      <nav id="main-nav" class="site-header__nav" role="navigation" aria-label="Navegación principal">
-        <ul class="site-header__nav-list" role="list">
-          <li><a href="#inicio"      class="site-header__nav-link" data-nav-link>Inicio</a></li>
-          <li><a href="#contacto"    class="site-header__nav-link" data-nav-link>Contacto</a></li>
-          <li><a href="#ubicacion"   class="site-header__nav-link" data-nav-link>Ubicación</a></li>
-          <li><a href="#informacion" class="site-header__nav-link" data-nav-link>Información</a></li>
-        </ul>
-      </nav>
-
-    </div>
+    <nav class="site-nav" aria-label="Navegación principal" data-nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#informacion">Información</a>
+      <a href="#contacto">Contacto</a>
+      <a href="#comunidad">Comunidad</a>
+    </nav>
   </header>
 
-  <!-- Animación scroll-driven (sin cambios en canvas ni driver) -->
-  <main class="scene">
-    <canvas id="canvas" class="scene__canvas" aria-hidden="true"></canvas>
+  <main>
+    <section class="hero blue-section" id="inicio">
+      <div class="container hero__layout reveal">
+        <div>
+          <p class="kicker">POR Y PARA LA COMUNIDAD</p>
+          <h1>Escuela<br><span style="white-space:nowrap">San Gerardo</span></h1>
+          <p class="hero__text">Centro educativo ubicado en Ciudad Quesada, San Carlos, comprometido con el aprendizaje, la formación integral y el desarrollo de sus estudiantes.</p>
+          <a class="button button--light" href="tel:+50624605236">Contactar</a>
+        </div>
+        <img src="assets/images/estudiantes.png" alt="Estudiantes de la Escuela San Gerardo" class="hero__img">
+      </div>
+    </section>
 
-    <div id="scroll-driver" class="scene__scroll-driver">
+    <section class="section section--light" id="informacion">
+      <div class="container split reveal">
+        <div>
+          <p class="kicker kicker--dark">INFORMACIÓN INSTITUCIONAL</p>
+          <h2>Una institución al servicio de la niñez sancarleña</h2>
+        </div>
+        <div>
+          <p>La Escuela San Gerardo es un centro educativo público ubicado en Ciudad Quesada, perteneciente al Circuito 14, con código institucional 1630.</p>
+          <div class="facts" aria-label="Datos rápidos de la institución">
+            <span>Ciudad Quesada</span>
+            <span>San Carlos</span>
+            <span>Circuito 14</span>
+            <span>Código 1630</span>
+            <span>Centro educativo público</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <!-- ─── Zona 1 — Inicio / Hero (frames 0–75) ─────────── -->
-      <div class="scene__zone">
-        <section id="inicio" class="hero" aria-labelledby="hero-title">
-          <div class="hero__card">
-            <span class="hero__badge" aria-hidden="true">MEP · Circuito 14</span>
-            <h1 id="hero-title" class="hero__title">
-              Escuela<br>San Gerardo
-            </h1>
-            <p class="hero__subtitle">Ciudad Quesada, Circuito 14, Código 1630</p>
-            <p class="hero__desc">
-              Un centro educativo comprometido con el aprendizaje,
-              la comunidad y el desarrollo integral de sus estudiantes.
-            </p>
-            <a
-              href="tel:+50624605236"
-              class="btn btn--primary"
-              aria-label="Llamar a la Escuela San Gerardo"
-            >
-              Contactar
+    <!-- SECCIÓN SCROLL DRIVEN: esta sección bloquea el scroll vertical para avanzar la secuencia de frames -->
+    <section class="scroll-driven section--light" aria-labelledby="scroll-driven-titulo" data-scroll-driven>
+      <h2 id="scroll-driven-titulo" class="sr-only">Secuencia visual controlada por scroll</h2>
+      <div class="scroll-driven__sticky">
+        <div class="scroll-driven__frame">
+          <img
+            src="assets/images/frames/ezgif-frame-001.png"
+            alt="Secuencia visual de la institución controlada por el scroll"
+            class="scroll-driven__image"
+            data-scroll-frame
+          >
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contacto">
+      <div class="container contact-band reveal">
+        <div>
+          <p class="kicker kicker--dark">UBICACIÓN Y CONTACTO</p>
+          <h2>Comunicación directa con la institución</h2>
+          <p>Ciudad Quesada, San Carlos<br>Correo: esc.sangerardo.sancarlos@mep.go.cr<br>Teléfono: 2460-5236</p>
+        </div>
+        <div class="button-group">
+          <div class="contact-col">
+            <a href="mailto:esc.sangerardo.sancarlos@mep.go.cr" class="contact-icon-card" aria-label="Enviar correo">
+              <img src="assets/images/iconos/correo.png" alt="">
             </a>
+            <a class="button" href="mailto:esc.sangerardo.sancarlos@mep.go.cr">Enviar correo</a>
           </div>
-        </section>
-      </div>
-
-      <!-- ─── Zona 2 — Contacto (frames 75–150) ────────────── -->
-      <div class="scene__zone">
-        <section id="contacto" class="scene-section" data-entry="bottom" aria-labelledby="contacto-heading">
-          <div class="scene-section__card scene-section__card--wide">
-            <span class="hero__badge" aria-hidden="true">Contáctanos</span>
-            <h2 id="contacto-heading" class="scene-section__title">Información de contacto</h2>
-            <div class="contact-grid">
-
-              <article class="contact-card" aria-label="Correo institucional">
-                <div class="contact-card__icon" aria-hidden="true">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                    <rect x="2" y="4" width="20" height="16" rx="3" stroke="currentColor" stroke-width="1.6"/>
-                    <path d="M2 8l10 7 10-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                  </svg>
-                </div>
-                <h3 class="contact-card__title">Correo institucional</h3>
-                <p class="contact-card__value">
-                  <a
-                    href="mailto:esc.sangerardo.sancarlos@mep.go.cr"
-                    class="contact-card__link"
-                    aria-label="Correo de la Escuela San Gerardo"
-                  >
-                    esc.sangerardo.sancarlos@mep.go.cr
-                  </a>
-                </p>
-                <a
-                  href="mailto:esc.sangerardo.sancarlos@mep.go.cr"
-                  class="btn btn--secondary"
-                  aria-label="Enviar correo a la Escuela San Gerardo"
-                >
-                  Enviar correo
-                </a>
-              </article>
-
-              <article class="contact-card" aria-label="Teléfono institucional">
-                <div class="contact-card__icon" aria-hidden="true">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                    <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-                <h3 class="contact-card__title">Teléfono</h3>
-                <p class="contact-card__value">
-                  <a href="tel:+50624605236" class="contact-card__link">2460-5236</a>
-                </p>
-                <a
-                  href="tel:+50624605236"
-                  class="btn btn--secondary"
-                  aria-label="Llamar a la Escuela San Gerardo"
-                >
-                  Llamar ahora
-                </a>
-              </article>
-
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <!-- ─── Zona 3 — Ubicación (frames 150–225) ──────────── -->
-      <div class="scene__zone">
-        <section id="ubicacion" class="scene-section scene-section--right" data-entry="right" data-rotate="-1.5" aria-labelledby="ubicacion-heading">
-          <div class="scene-section__card">
-            <span class="hero__badge" aria-hidden="true">Dónde estamos</span>
-            <h2 id="ubicacion-heading" class="scene-section__title">Ubicación</h2>
-            <p class="scene-section__desc">Ciudad Quesada, San Carlos.</p>
-            <a
-              href="https://www.google.com/maps/search/?api=1&query=Escuela+San+Gerardo+Ciudad+Quesada+San+Carlos"
-              class="btn btn--secondary"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Ver la Escuela San Gerardo en Google Maps (abre en nueva pestaña)"
-            >
-              Ver en Google Maps
+          <div class="contact-col">
+            <a href="tel:+50624605236" class="contact-icon-card" aria-label="Llamar ahora">
+              <img src="assets/images/iconos/telefono.png" alt="">
             </a>
+            <a class="button button--ghost" href="tel:+50624605236">Llamar ahora</a>
           </div>
-        </section>
-      </div>
-
-      <!-- ─── Zona 4 — Programa bilingüe (frames 150–187) ── -->
-      <div class="scene__zone scene__zone--sm">
-        <section id="informacion" class="scene-section scene-section--valign-bottom" data-entry="left" data-rotate="1.5" aria-labelledby="informacion-heading">
-          <div class="scene-section__card">
-            <span class="hero__badge" aria-hidden="true">Institución</span>
-            <h2 id="informacion-heading" class="scene-section__title">Información institucional</h2>
-            <p class="scene-section__desc">
-              Centro educativo público en Ciudad Quesada, Circuito 14, código 1630.
-            </p>
-            <ul class="badge-list" role="list" aria-label="Datos institucionales">
-              <li class="badge">Ciudad Quesada</li>
-              <li class="badge">Circuito 14</li>
-              <li class="badge">Código 1630</li>
-              <li class="badge">Centro educativo público</li>
-              <li class="badge">San Carlos</li>
-            </ul>
-            <article class="info-card info-card--bilingual" aria-label="Programa bilingüe">
-              <h3 class="info-card__title">Impulso al aprendizaje bilingüe</h3>
-              <p class="info-card__text">
-                Destacada por su participación en el Programa Costa Rica Bilingüe del MEP,
-                fortaleciendo el aprendizaje del inglés desde edades tempranas.
-              </p>
-            </article>
+          <div class="contact-col">
+            <a href="https://www.google.com/maps/search/?api=1&query=Escuela+San+Gerardo+Ciudad+Quesada+San+Carlos" class="contact-icon-card" aria-label="Ver ubicación" target="_blank" rel="noopener noreferrer">
+              <img src="assets/images/iconos/ubicacion.png" alt="">
+            </a>
+            <a class="button button--ghost" href="https://www.google.com/maps/search/?api=1&query=Escuela+San+Gerardo+Ciudad+Quesada+San+Carlos" target="_blank" rel="noopener noreferrer">Ver ubicación</a>
           </div>
-        </section>
+        </div>
       </div>
+    </section>
 
-      <!-- ─── Zona 5 — Horario (frames 187–225) ────────────── -->
-      <div class="scene__zone scene__zone--sm">
-        <section class="scene-section scene-section--right" data-entry="top" aria-label="Horario de atención">
-          <div class="scene-section__card">
-            <article class="info-card info-card--schedule" aria-label="Horario de atención">
-              <h3 class="info-card__title">Horario de atención</h3>
-              <p class="info-card__schedule">
-                <span class="info-card__schedule-days">Lunes a viernes</span>
-                <span class="info-card__schedule-hours">7:00 a.&nbsp;m. — 5:00 p.&nbsp;m.</span>
-              </p>
-            </article>
-          </div>
-        </section>
+    <section class="community blue-section" id="comunidad">
+      <div class="container community__layout reveal">
+        <div class="community__content">
+          <p class="kicker">COMUNIDAD Y COLABORACIÓN</p>
+          <h2>Vinculación con la comunidad</h2>
+          <p>La Escuela San Gerardo abre espacios para personas, estudiantes e instituciones interesadas en apoyar mediante voluntariados, Trabajo Comunal Universitario, proyectos educativos o iniciativas de impacto social.</p>
+          <p class="muted-light">Para conocer oportunidades de colaboración, puede comunicarse directamente con la institución.</p>
+          <a class="button button--light" href="mailto:esc.sangerardo.sancarlos@mep.go.cr?subject=Consulta%20sobre%20voluntariado%2C%20TCU%20o%20trabajo%20comunal">Solicitar información</a>
+        </div>
+        <div class="community__media" aria-hidden="true">
+          <img src="assets/images/logo3d.png" alt="" class="community__logo3d">
+        </div>
       </div>
+    </section>
 
-      <!-- ─── Zona 6 — Vinculación (frames 225–262) ────────── -->
-      <div class="scene__zone scene__zone--sm">
-        <section class="scene-section scene-section--valign-bottom" data-entry="bottom" data-rotate="-1" aria-labelledby="community-heading">
-          <div class="scene-section__card">
-            <article class="info-card info-card--community" aria-labelledby="community-heading">
-              <h3 id="community-heading" class="info-card__title">Vinculación con la comunidad</h3>
-              <p class="info-card__text">
-                Abrimos espacios para voluntariados, TCU y proyectos educativos de impacto social.
-                Comuníquese directamente para conocer oportunidades de colaboración.
-              </p>
-              <a
-                href="mailto:esc.sangerardo.sancarlos@mep.go.cr?subject=Consulta%20sobre%20voluntariado%2C%20TCU%20o%20trabajo%20comunal"
-                class="btn btn--primary"
-                aria-label="Solicitar información sobre voluntariado o Trabajo Comunal Universitario"
-              >
-                Solicitar información
-              </a>
-            </article>
-          </div>
-        </section>
+    <section class="schedule" aria-labelledby="horario-titulo">
+      <div class="container schedule__box reveal">
+        <div>
+          <h2 id="horario-titulo">Horario de atención</h2>
+          <p><strong>Lunes a viernes</strong> — 7:00 a. m. a 5:00 p. m.</p>
+        </div>
+        <span class="schedule__icon" aria-hidden="true">◷</span>
       </div>
-
-      <!-- ─── Zona 7 — Cita (frames 262–300) ─────────────── -->
-      <div class="scene__zone scene__zone--sm">
-        <section class="scene-section scene-section--center" aria-label="Cita inspiradora sobre educación">
-          <figure class="scene-section__card quote-card">
-            <span class="quote-card__mark" aria-hidden="true">&ldquo;</span>
-            <blockquote class="quote-card__text">
-              La educación es el arma más poderosa que puedes usar para cambiar el mundo.
-            </blockquote>
-            <figcaption class="quote-card__author">— Nelson Mandela</figcaption>
-          </figure>
-        </section>
-      </div>
-
-    </div><!-- /#scroll-driver -->
-
+    </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="site-footer" role="contentinfo">
-    <div class="site-footer__inner">
-      <p class="site-footer__name">Escuela San Gerardo</p>
-      <p class="site-footer__location">Ciudad Quesada, San Carlos</p>
-      <address class="site-footer__address">
-        <a href="mailto:esc.sangerardo.sancarlos@mep.go.cr" class="site-footer__link">
-          esc.sangerardo.sancarlos@mep.go.cr
-        </a>
-        <span aria-hidden="true">·</span>
-        <a href="tel:+50624605236" class="site-footer__link">2460-5236</a>
-      </address>
-      <p class="site-footer__note">Sitio informativo institucional.</p>
+  <footer class="footer">
+    <div class="container footer__layout">
+      <div>
+        <strong>Escuela San Gerardo</strong>
+        <p>Ciudad Quesada, San Carlos · Costa Rica</p>
+      </div>
+      <div>
+        <a href="mailto:esc.sangerardo.sancarlos@mep.go.cr">esc.sangerardo.sancarlos@mep.go.cr</a>
+        <p>2460-5236</p>
+      </div>
     </div>
   </footer>
 
-  <!-- Widget de accesibilidad (flotante, esquina inferior derecha) -->
-  <div class="a11y-widget" id="a11y-widget">
-
-    <button
-      class="a11y-widget__toggle"
-      id="a11y-toggle"
-      type="button"
-      aria-expanded="false"
-      aria-controls="a11y-panel"
-      aria-label="Herramientas de accesibilidad"
-    >
-      <!-- Ícono universal de accesibilidad -->
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-           stroke="currentColor" stroke-width="2" stroke-linecap="round"
-           stroke-linejoin="round" aria-hidden="true" focusable="false">
-        <circle cx="12" cy="4" r="2"/>
-        <path d="M6 9h12M12 9v11M9 20l3-4 3 4"/>
+  <div class="accessibility">
+    <div class="accessibility__panel" data-a11y-panel>
+      <button type="button" data-font="down" aria-label="Disminuir tamaño de letra">A-</button>
+      <button type="button" data-font="reset" aria-label="Restablecer tamaño de letra">A</button>
+      <button type="button" data-font="up" aria-label="Aumentar tamaño de letra">A+</button>
+    </div>
+    <button class="accessibility__toggle" type="button" aria-label="Opciones de accesibilidad" aria-expanded="false" data-a11y-toggle>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="22" height="22" aria-hidden="true">
+        <circle cx="12" cy="4" r="2.5"/>
+        <path d="M16.5 9a.5.5 0 01-.5.5H13v4l2.5 5.5a.5.5 0 01-.9.4L12 14l-2.6 5.4a.5.5 0 11-.9-.4L11 13.5V9.5H8a.5.5 0 010-1h8a.5.5 0 01.5.5z"/>
       </svg>
     </button>
-
-    <div
-      class="a11y-widget__panel"
-      id="a11y-panel"
-      role="dialog"
-      aria-modal="false"
-      aria-label="Herramientas de accesibilidad"
-      hidden
-    >
-      <p class="a11y-widget__section-label" aria-hidden="true">Tamaño del texto</p>
-      <div class="a11y-widget__controls" role="group" aria-label="Ajustar tamaño del texto">
-        <button class="a11y-widget__btn a11y-widget__btn--decrease"
-                id="a11y-decrease"
-                type="button"
-                aria-label="Reducir tamaño del texto">A−</button>
-        <button class="a11y-widget__btn a11y-widget__btn--base"
-                id="a11y-reset"
-                type="button"
-                aria-label="Restablecer tamaño normal del texto">A</button>
-        <button class="a11y-widget__btn a11y-widget__btn--increase"
-                id="a11y-increase"
-                type="button"
-                aria-label="Aumentar tamaño del texto">A+</button>
-      </div>
-      <p class="a11y-widget__level"
-         id="a11y-level"
-         aria-live="polite"
-         aria-atomic="true">Normal</p>
-    </div>
-
   </div>
-
-  <script src="js/script.js" defer></script>
-
 </body>
 </html>
