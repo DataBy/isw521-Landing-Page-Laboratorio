@@ -91,44 +91,79 @@ a11yPanel?.addEventListener('click', event => {
   if (action === 'up') setFont(fontIndex + 1);
 });
 
-// SECCIÓN SCROLL DRIVEN: esta lógica usa el avance real del scroll vertical para recorrer los frames.
+// SECCIÓN SCROLL DRIVEN
 const scrollDrivenSection = document.querySelector('[data-scroll-driven]');
-const scrollDrivenImage = document.querySelector('[data-scroll-frame]');
+const scrollDrivenCanvas = document.querySelector('[data-scroll-frame]');
 let updateScrollDrivenFrame = null;
 
-if (scrollDrivenSection && scrollDrivenImage) {
+if (scrollDrivenSection && scrollDrivenCanvas) {
   const totalFrames = 300;
-  const frameSources = Array.from({ length: totalFrames }, (_, index) =>
-    `assets/images/frames/ezgif-frame-${String(index + 1).padStart(3, '0')}.png`
-  );
+  const ctx = scrollDrivenCanvas.getContext('2d');
+  let activeFrame = -1;
+  let rafPending = false;
 
-  let activeFrame = 0;
+  // Precarga todos los frames al inicio para eliminar fetch en cada cambio
+  const images = Array.from({ length: totalFrames }, (_, i) => {
+    const img = new Image();
+    img.src = `assets/images/frames/ezgif-frame-${String(i + 1).padStart(3, '0')}.png`;
+    return img;
+  });
 
-  scrollDrivenImage.src = frameSources[0];
-
-  function renderScrollDrivenFrame(nextFrame) {
-    if (nextFrame === activeFrame) return;
-    activeFrame = nextFrame;
-    scrollDrivenImage.src = frameSources[nextFrame];
+  function sizeCanvas() {
+    scrollDrivenCanvas.width = scrollDrivenCanvas.offsetWidth;
+    scrollDrivenCanvas.height = scrollDrivenCanvas.offsetHeight;
+    activeFrame = -1;
   }
 
-  function syncScrollDrivenFrame() {
-    const rect = scrollDrivenSection.getBoundingClientRect();
-    const sectionScrollRange = Math.max(scrollDrivenSection.offsetHeight - window.innerHeight, 1);
-    const traveled = Math.min(Math.max(-rect.top, 0), sectionScrollRange);
-    const progress = traveled / sectionScrollRange;
-    const nextFrame = Math.min(totalFrames - 1, Math.round(progress * (totalFrames - 1)));
-    renderScrollDrivenFrame(nextFrame);
-  }
-
-  // SECCIÓN SCROLL DRIVEN: los frames se sincronizan directamente con la posición vertical dentro de la sección.
-  updateScrollDrivenFrame = () => {
-    if (reduceMotion) {
-      renderScrollDrivenFrame(0);
-      return;
+  function fitAndDraw(index) {
+    const img = images[index];
+    if (!img.complete || !img.naturalWidth) return;
+    const cw = scrollDrivenCanvas.width;
+    const ch = scrollDrivenCanvas.height;
+    if (!cw || !ch) return;
+    // Equivalente a object-fit: cover; object-position: left center
+    const ir = img.naturalWidth / img.naturalHeight;
+    const cr = cw / ch;
+    let sx, sy, sw, sh;
+    if (ir > cr) {
+      sh = img.naturalHeight; sw = sh * cr; sx = 0; sy = 0;
+    } else {
+      sw = img.naturalWidth; sh = sw / cr; sx = 0; sy = (img.naturalHeight - sh) / 2;
     }
-    syncScrollDrivenFrame();
+    ctx.clearRect(0, 0, cw, ch);
+    ctx.drawImage(img, sx, sy, sw, sh, 0, 0, cw, ch);
+  }
+
+  function renderFrame(next) {
+    if (next === activeFrame) return;
+    activeFrame = next;
+    fitAndDraw(next);
+  }
+
+  function syncFrame() {
+    const rect = scrollDrivenSection.getBoundingClientRect();
+    const range = Math.max(scrollDrivenSection.offsetHeight - window.innerHeight, 1);
+    const traveled = Math.min(Math.max(-rect.top, 0), range);
+    const next = Math.min(totalFrames - 1, Math.round((traveled / range) * (totalFrames - 1)));
+    renderFrame(next);
+  }
+
+  updateScrollDrivenFrame = () => {
+    if (reduceMotion) { renderFrame(0); return; }
+    if (rafPending) return;
+    rafPending = true;
+    requestAnimationFrame(() => { rafPending = false; syncFrame(); });
   };
+
+  // Redimensiona el canvas cuando el contenedor cambia de tamaño
+  new ResizeObserver(() => { sizeCanvas(); syncFrame(); }).observe(scrollDrivenCanvas);
+
+  if (images[0].complete) {
+    sizeCanvas();
+    renderFrame(0);
+  } else {
+    images[0].onload = () => { sizeCanvas(); renderFrame(0); };
+  }
 
   addEventListener('resize', updateScrollDrivenFrame, { passive: true });
   updateScrollDrivenFrame();
