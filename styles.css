@@ -491,10 +491,10 @@ h2 { font-size: clamp(2rem, 4vw, 4rem); }
   }
   .section, .community { padding: 84px 0; }
   .contact-band, .schedule__box { padding: 32px; }
-  .button-group { flex-direction: column; align-items: stretch; width: 100%; }
-  .contact-col { flex-direction: row; align-items: center; gap: 16px; }
-  .contact-icon-card { height: auto; margin-bottom: 0; flex-shrink: 0; }
-  .contact-icon-card img { width: 52px; height: 52px; }
+  .button-group { flex-direction: column; align-items: stretch; width: 100%; gap: 10px; }
+  .contact-col { align-items: stretch; gap: 0; }
+  .contact-col .button { width: 100%; justify-content: center; }
+  .contact-icon-card { display: none; }
   .contact-btns { justify-content: flex-start; }
   .community__media { justify-content: flex-start; }
   .community__logo3d { width: min(100%, 520px); }
